@@ -1,25 +1,22 @@
 import streamlit as st
-from src.database import init_db, add_task, get_tasks
 
-st.set_page_config(page_title="Local Python App")
+st.set_page_config(
+    page_title="Python 3.15 App",
+    page_icon="🐍",
+    layout="centered"
+)
 
-init_db()
+st.title("🐍 My Python Application")
 
-st.title("My Local Application")
-st.write("Python UI + local SQLite database")
+st.write("Welcome! Your Streamlit app is running.")
 
-with st.form("task_form"):
-    title = st.text_input("Task name")
-    submitted = st.form_submit_button("Add task")
+name = st.text_input("Enter your name")
 
-    if submitted:
-        if title.strip():
-            add_task(title.strip())
-            st.success("Task added")
-        else:
-            st.warning("Enter a task name")
+if st.button("Submit"):
+    if name.strip():
+        st.success(f"Hello, {name}! Your app is working.")
+    else:
+        st.warning("Please enter your name.")
 
-st.subheader("Saved tasks")
-
-for task_id, title, completed in get_tasks():
-    st.write(f"{task_id}. {title}")
+st.divider()
+st.write("Built with Python and Streamlit")
